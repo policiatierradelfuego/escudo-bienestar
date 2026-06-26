@@ -468,24 +468,125 @@
     }
 
     footer {
-      padding: 0 0 calc(var(--space-12) + 7rem);
+      padding: var(--space-12) 0 var(--space-16);
       color: var(--color-text-muted);
     }
 
-    .downloads-bar {
+    /* Floating Action Button (FAB) */
+    .fab-container {
       position: fixed;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(1180px, calc(100% - 2rem));
-      z-index: 1000;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.75rem;
     }
 
-    .downloads-bar .panel {
-      background: color-mix(in srgb, var(--color-surface) 75%, transparent);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    .fab-trigger {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--color-gold);
+      color: #0f141d;
+      border: none;
+      box-shadow: 0 8px 32px rgba(185, 140, 42, 0.4);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, background-color 0.3s ease;
+      outline: none;
+    }
+
+    .fab-trigger:hover {
+      transform: scale(1.08) rotate(-5deg);
+      box-shadow: 0 12px 40px rgba(185, 140, 42, 0.6);
+      background: color-mix(in srgb, var(--color-gold) 90%, #fff);
+    }
+
+    .fab-trigger:active {
+      transform: scale(0.95);
+    }
+
+    .fab-trigger svg {
+      width: 24px;
+      height: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .fab-container.is-active .fab-icon-download {
+      display: none !important;
+    }
+    .fab-container.is-active .fab-icon-close {
+      display: block !important;
+      animation: rotateIn 0.3s ease forwards;
+    }
+
+    @keyframes rotateIn {
+      from { transform: rotate(-90deg) scale(0.8); opacity: 0; }
+      to { transform: rotate(0) scale(1); opacity: 1; }
+    }
+
+    .fab-menu {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.6rem;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+      transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      width: max-content;
+    }
+
+    .fab-container.is-active .fab-menu {
+      pointer-events: auto;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .fab-container.is-active .dl-pill:nth-child(6) { transition-delay: 0.02s; }
+    .fab-container.is-active .dl-pill:nth-child(5) { transition-delay: 0.05s; }
+    .fab-container.is-active .dl-pill:nth-child(4) { transition-delay: 0.08s; }
+    .fab-container.is-active .dl-pill:nth-child(3) { transition-delay: 0.11s; }
+    .fab-container.is-active .dl-pill:nth-child(2) { transition-delay: 0.14s; }
+    .fab-container.is-active .dl-pill:nth-child(1) { transition-delay: 0.17s; }
+
+    .fab-menu .dl-pill {
+      background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--color-border);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      padding: 0.75rem 1.25rem;
+      border-radius: 999px;
+      transform: translateX(15px);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .fab-container.is-active .dl-pill {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .fab-container {
+        bottom: 1.5rem;
+        right: 1.5rem;
+      }
+      .fab-trigger {
+        width: 54px;
+        height: 54px;
+      }
+      .fab-trigger svg {
+        width: 22px;
+        height: 22px;
+      }
+      .fab-menu .dl-pill {
+        padding: 0.65rem 1.1rem;
+      }
     }
 
     .zoomable {
@@ -799,42 +900,46 @@
     </div>
   </div>
 
-  <section class="downloads-bar" aria-labelledby="seccion-descargas">
-    <article class="panel"
-      style="display:flex; flex-wrap:wrap; gap:1rem; align-items:stretch; justify-content:space-between; padding:1.25rem 1.5rem;">
-      <div>
-        <h2 id="seccion-descargas" style="margin:0 0 .25rem;">Descargas</h2>
-        <p style="margin:0; color:var(--color-text-muted); max-width:30rem;">Descarga directa de las imágenes embebidas
-          y del archivo de exégesis.</p>
-      </div>
-      <div style="display:flex; flex-wrap:wrap; gap:.75rem;">
-        <button class="dl-pill" type="button" data-download="escudo_bordado">
-          <span class="dl-icon">📸</span>
-          <span class="dl-text">Escudo Bordado</span>
-        </button>
-        <button class="dl-pill" type="button" data-download="escudo_plano">
-          <span class="dl-icon">🎨</span>
-          <span class="dl-text">Escudo Plano</span>
-        </button>
-        <button class="dl-pill" type="button" data-download="pin_metal">
-          <span class="dl-icon">📍</span>
-          <span class="dl-text">Pin Metálico</span>
-        </button>
-        <button class="dl-pill" type="button" data-download="pin_plano">
-          <span class="dl-icon">🛡️</span>
-          <span class="dl-text">Pin Plano</span>
-        </button>
-        <button class="dl-pill" type="button" data-download="infografia">
-          <span class="dl-icon">🧩</span>
-          <span class="dl-text">Infografía</span>
-        </button>
-        <button class="dl-pill" type="button" data-download="md">
-          <span class="dl-icon">📄</span>
-          <span class="dl-text">Exégesis (MD)</span>
-        </button>
-      </div>
-    </article>
-  </section>
+  <!-- Floating Download Button (FAB) -->
+  <div class="fab-container" id="fab-download-container">
+    <div class="fab-menu" id="fab-download-menu" aria-hidden="true">
+      <button class="dl-pill" type="button" data-download="escudo_bordado">
+        <span class="dl-icon">📸</span>
+        <span class="dl-text">Escudo Bordado</span>
+      </button>
+      <button class="dl-pill" type="button" data-download="escudo_plano">
+        <span class="dl-icon">🎨</span>
+        <span class="dl-text">Escudo Plano</span>
+      </button>
+      <button class="dl-pill" type="button" data-download="pin_metal">
+        <span class="dl-icon">📍</span>
+        <span class="dl-text">Pin Metálico</span>
+      </button>
+      <button class="dl-pill" type="button" data-download="pin_plano">
+        <span class="dl-icon">🛡️</span>
+        <span class="dl-text">Pin Plano</span>
+      </button>
+      <button class="dl-pill" type="button" data-download="infografia">
+        <span class="dl-icon">🧩</span>
+        <span class="dl-text">Infografía</span>
+      </button>
+      <button class="dl-pill" type="button" data-download="md">
+        <span class="dl-icon">📄</span>
+        <span class="dl-text">Exégesis (MD)</span>
+      </button>
+    </div>
+    <button class="fab-trigger" id="fab-download-trigger" type="button" aria-label="Abrir opciones de descarga" aria-expanded="false">
+      <svg class="fab-icon-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
+      </svg>
+      <svg class="fab-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+  </div>
 
   <footer class="shell">
     <p>Pieza visual y texto exegético dispuestos en una sola presentación HTML, con la imagen del escudo embebida para
@@ -1055,6 +1160,54 @@ Las leyendas “BIENESTAR POLICIAL” y “SERVICIO Y CUIDADO” completan el se
             downloadMd();
           }
         });
+      });
+
+      // FAB Toggle Logic
+      const fabContainer = document.getElementById('fab-download-container');
+      const fabTrigger = document.getElementById('fab-download-trigger');
+      const fabIconDownload = fabTrigger.querySelector('.fab-icon-download');
+      const fabIconClose = fabTrigger.querySelector('.fab-icon-close');
+
+      function toggleFab() {
+        const isActive = fabContainer.classList.toggle('is-active');
+        fabTrigger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        if (isActive) {
+          fabIconClose.style.display = 'block';
+          fabIconDownload.style.display = 'none';
+        } else {
+          fabIconClose.style.display = 'none';
+          fabIconDownload.style.display = 'block';
+        }
+      }
+
+      function closeFab() {
+        if (fabContainer.classList.contains('is-active')) {
+          fabContainer.classList.remove('is-active');
+          fabTrigger.setAttribute('aria-expanded', 'false');
+          fabIconClose.style.display = 'none';
+          fabIconDownload.style.display = 'block';
+        }
+      }
+
+      if (fabTrigger) {
+        fabTrigger.addEventListener('click', function (e) {
+          e.stopPropagation();
+          toggleFab();
+        });
+      }
+
+      // Close FAB when clicking outside
+      document.addEventListener('click', function (e) {
+        if (fabContainer && !fabContainer.contains(e.target)) {
+          closeFab();
+        }
+      });
+
+      // Close FAB on Escape key
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          closeFab();
+        }
       });
     })();
   </script>
