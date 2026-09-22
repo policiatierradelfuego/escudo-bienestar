@@ -260,6 +260,9 @@
     }
 
     .shield-wrap {
+      /* Neutraliza el margen predeterminado de <figure>, que sumaba 80 px
+         al ancho del carrusel y lo recortaba en pantallas angostas. */
+      margin: 0;
       padding: clamp(0.75rem, 2vw, 1.25rem);
       overflow: hidden;
       width: 100%;
