@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>Escudo División Bienestar Policial</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,7 @@
       --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
       --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
       --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
-      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --text-2xl: clamp(1.8rem, 1rem + 2.5vw, 3.5rem);
       --space-1: 0.25rem;
       --space-2: 0.5rem;
       --space-3: 0.75rem;
@@ -31,7 +31,7 @@
       --space-16: 4rem;
       --space-20: 5rem;
       --color-bg: #f6f2ea;
-      --color-surface: rgba(255, 255, 255, 0.78);
+      --color-surface: rgba(255, 255, 255, 0.85);
       --color-surface-2: #ece5d8;
       --color-text: #191714;
       --color-text-muted: #645d53;
@@ -39,7 +39,7 @@
       --color-primary: #0f2742;
       --color-gold: #b98c2a;
       --color-accent: #8f1d1d;
-      --shadow-lg: 0 24px 60px rgba(15, 22, 35, 0.14);
+      --shadow-lg: 0 16px 40px rgba(15, 22, 35, 0.12);
       --radius-lg: 1rem;
       --radius-xl: 1.5rem;
       --font-display: 'Cormorant Garamond', serif;
@@ -48,7 +48,7 @@
 
     [data-theme="dark"] {
       --color-bg: #0f141d;
-      --color-surface: rgba(24, 30, 42, 0.8);
+      --color-surface: rgba(24, 30, 42, 0.88);
       --color-surface-2: #1a2230;
       --color-text: #f3efe7;
       --color-text-muted: #c1b8aa;
@@ -56,7 +56,7 @@
       --color-primary: #d8e0ee;
       --color-gold: #d4a646;
       --color-accent: #d55454;
-      --shadow-lg: 0 28px 72px rgba(0, 0, 0, 0.38);
+      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.38);
     }
 
     *,
@@ -67,10 +67,12 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     body {
       margin: 0;
+      padding: 0;
       font-family: var(--font-body);
       font-size: var(--text-base);
       color: var(--color-text);
@@ -79,6 +81,8 @@
         radial-gradient(circle at bottom left, rgba(143, 29, 29, .14), transparent 26%),
         var(--color-bg);
       min-height: 100vh;
+      overflow-x: hidden;
+      width: 100%;
     }
 
     img {
@@ -111,7 +115,8 @@
       top: 0;
       z-index: 50;
       backdrop-filter: blur(14px);
-      background: color-mix(in srgb, var(--color-bg) 78%, transparent);
+      -webkit-backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--color-bg) 85%, transparent);
       border-bottom: 1px solid var(--color-border);
     }
 
@@ -120,18 +125,19 @@
       align-items: center;
       justify-content: space-between;
       gap: var(--space-4);
-      padding: var(--space-4) 0;
+      padding: var(--space-3) 0;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: .9rem;
+      gap: .75rem;
     }
 
     .mark {
       width: 2.5rem;
       height: 2.5rem;
+      flex-shrink: 0;
       border-radius: 999px;
       border: 1px solid var(--color-border);
       display: grid;
@@ -150,19 +156,20 @@
       display: block;
       color: var(--color-text-muted);
       font-size: var(--text-xs);
-      letter-spacing: .12em;
+      letter-spacing: .1em;
       text-transform: uppercase;
     }
 
     .brand-text strong {
       display: block;
       font-size: var(--text-sm);
-      letter-spacing: .03em;
+      letter-spacing: .02em;
+      line-height: 1.2;
     }
 
     .theme-toggle {
-      min-width: 44px;
-      min-height: 44px;
+      min-width: 42px;
+      min-height: 42px;
       border-radius: 999px;
       border: 1px solid var(--color-border);
       display: grid;
@@ -171,16 +178,17 @@
       color: var(--color-text);
       box-shadow: var(--shadow-lg);
       cursor: pointer;
+      flex-shrink: 0;
     }
 
     main {
-      padding: var(--space-10) 0 var(--space-16);
+      padding: clamp(1.5rem, 4vw, 3rem) 0 var(--space-16);
     }
 
     .hero {
       display: grid;
       grid-template-columns: 1.05fr .95fr;
-      gap: clamp(1.5rem, 4vw, 4rem);
+      gap: clamp(1.5rem, 3vw, 3rem);
       align-items: stretch;
     }
 
@@ -190,27 +198,26 @@
       letter-spacing: .16em;
       text-transform: uppercase;
       color: var(--color-gold);
-      margin-bottom: var(--space-4);
+      margin-bottom: var(--space-3);
     }
 
     h1,
     h2,
     h3 {
       font-family: var(--font-display);
-      line-height: 1.05;
+      line-height: 1.1;
       margin: 0;
     }
 
     h1 {
       font-size: var(--text-2xl);
-      margin-bottom: var(--space-5);
-      max-width: 12ch;
+      margin-bottom: var(--space-4);
     }
 
     .lead {
       color: var(--color-text-muted);
       max-width: 62ch;
-      line-height: 1.75;
+      line-height: 1.65;
     }
 
     .panel {
@@ -221,22 +228,21 @@
     }
 
     .hero-copy {
-      padding: clamp(1.5rem, 3vw, 2.5rem);
+      padding: clamp(1.25rem, 3vw, 2.5rem);
     }
 
     .meta {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: var(--space-3);
-      margin-top: var(--space-8);
+      margin-top: var(--space-6);
     }
 
     .meta-card {
-      padding: var(--space-4);
+      padding: var(--space-3) var(--space-4);
       border-radius: var(--radius-lg);
       background: color-mix(in srgb, var(--color-surface-2) 55%, transparent);
       border: 1px solid var(--color-border);
-      min-height: 112px;
     }
 
     .meta-card span {
@@ -244,17 +250,18 @@
       font-size: var(--text-xs);
       color: var(--color-text-muted);
       text-transform: uppercase;
-      letter-spacing: .12em;
-      margin-bottom: .35rem;
+      letter-spacing: .1em;
+      margin-bottom: .25rem;
     }
 
     .meta-card strong {
       font-size: var(--text-sm);
-      line-height: 1.45;
+      line-height: 1.4;
     }
 
     .shield-wrap {
-      padding: clamp(1rem, 2vw, 1.5rem);
+      padding: clamp(0.75rem, 2vw, 1.25rem);
+      overflow: hidden;
     }
 
     .shield-carousel {
@@ -262,25 +269,29 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      width: 100%;
     }
 
     .carousel-viewport {
       overflow: hidden;
-      border-radius: calc(var(--radius-xl) + .4rem);
+      border-radius: var(--radius-lg);
       flex-grow: 1;
-      display: flex;
-      align-items: center;
+      width: 100%;
+      touch-action: pan-y pinch-zoom;
     }
 
     .carousel-track {
       display: flex;
-      transition: transform .35s ease;
+      transition: transform .35s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
+      width: 100%;
     }
 
     .carousel-slide {
       min-width: 100%;
-      padding: clamp(1rem, 2vw, 1.5rem);
+      width: 100%;
+      flex-shrink: 0;
+      padding: clamp(0.5rem, 1.5vw, 1rem);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -290,145 +301,112 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 48px;
-      height: 48px;
+      width: 42px;
+      height: 42px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, .18);
-      background: rgba(15, 20, 29, .72);
+      border: 1px solid rgba(255, 255, 255, .25);
+      background: rgba(15, 20, 29, .75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       color: #fff;
       display: grid;
       place-items: center;
       cursor: pointer;
       z-index: 4;
+      font-size: 1.4rem;
+      user-select: none;
     }
 
     .carousel-prev {
-      left: .75rem;
+      left: .5rem;
     }
 
     .carousel-next {
-      right: .75rem;
+      right: .5rem;
     }
 
     .carousel-dots {
       display: flex;
       justify-content: center;
-      gap: .5rem;
-      padding: 0 0 1rem;
+      gap: .6rem;
+      padding: .75rem 0 .25rem;
     }
 
     .carousel-dot {
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       border-radius: 999px;
       border: 0;
-      background: color-mix(in srgb, var(--color-text-muted) 55%, transparent);
+      background: color-mix(in srgb, var(--color-text-muted) 45%, transparent);
       cursor: pointer;
+      padding: 0;
+      transition: background 0.2s, transform 0.2s;
     }
 
     .carousel-dot.is-active {
       background: var(--color-gold);
-      transform: scale(1.2);
-    }
-
-    .modal-toolbar {
-      position: fixed;
-      left: 50%;
-      bottom: 1rem;
-      transform: translateX(-50%);
-      display: flex;
-      gap: .75rem;
-      padding: .65rem .8rem;
-      border-radius: 999px;
-      background: rgba(15, 20, 29, .78);
-      border: 1px solid rgba(255, 255, 255, .18);
-      z-index: 10001;
-    }
-
-    .modal-tool {
-      min-width: 52px;
-      min-height: 52px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, .16);
-      background: rgba(255, 255, 255, .06);
-      color: #fff;
-      cursor: pointer;
-      font-size: 1.15rem;
-    }
-
-    .modal-stage {
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: grab;
-    }
-
-    .modal-stage.is-dragging {
-      cursor: grabbing;
+      transform: scale(1.25);
     }
 
     .shield-frame {
       position: relative;
-      padding: clamp(1rem, 2vw, 1.5rem);
-      border-radius: calc(var(--radius-xl) + .4rem);
-      background: linear-gradient(145deg, rgba(212, 166, 70, .22), rgba(255, 255, 255, .03));
-      border: 1px solid rgba(212, 166, 70, .35);
+      width: 100%;
+      padding: clamp(0.75rem, 2vw, 1.25rem);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(145deg, rgba(212, 166, 70, .18), rgba(255, 255, 255, .02));
+      border: 1px solid rgba(212, 166, 70, .3);
       overflow: hidden;
-    }
-
-    .shield-frame::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(255, 255, 255, .18), transparent 35%);
-      pointer-events: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .shield-image {
       position: relative;
       z-index: 1;
-      width: min(100%, 480px);
+      max-width: 100%;
+      max-height: 480px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
       margin-inline: auto;
-      filter: drop-shadow(0 26px 36px rgba(0, 0, 0, .35));
-      border-radius: 1rem;
+      filter: drop-shadow(0 16px 28px rgba(0, 0, 0, .35));
+      border-radius: .75rem;
     }
 
     .section {
-      margin-top: var(--space-12);
+      margin-top: var(--space-8);
     }
 
     .section-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--space-6);
+      gap: var(--space-5);
     }
 
     .card {
-      padding: clamp(1.25rem, 2vw, 1.75rem);
+      padding: clamp(1.25rem, 2.5vw, 1.75rem);
       min-height: 100%;
     }
 
     h2 {
       font-size: var(--text-xl);
-      margin-bottom: var(--space-4);
+      margin-bottom: var(--space-3);
     }
 
     .card p {
       color: var(--color-text-muted);
-      line-height: 1.75;
+      line-height: 1.65;
       margin: 0;
     }
 
     .card p+p {
-      margin-top: var(--space-4);
+      margin-top: var(--space-3);
     }
 
     .quote {
-      margin-top: var(--space-12);
-      padding: clamp(1.5rem, 3vw, 2.25rem);
+      margin-top: var(--space-8);
+      padding: clamp(1.25rem, 3vw, 2rem);
       border-left: 4px solid var(--color-gold);
     }
 
@@ -437,26 +415,25 @@
       font-size: var(--text-lg);
       font-family: var(--font-display);
       line-height: 1.35;
-      max-width: 30ch;
     }
 
     .dl-pill {
       display: inline-flex;
       align-items: center;
       gap: .5rem;
-      padding: .55rem .95rem;
+      padding: .6rem 1rem;
       border-radius: 999px;
       border: 1px solid var(--color-border);
       background: color-mix(in srgb, var(--color-surface-2) 70%, transparent);
       color: var(--color-text);
       text-decoration: none;
       font-size: var(--text-sm);
+      cursor: pointer;
+      font-family: var(--font-body);
     }
 
     .dl-pill:hover {
-      background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface-2));
-      transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, .18);
+      background: color-mix(in srgb, var(--color-primary) 15%, var(--color-surface-2));
     }
 
     .dl-icon {
@@ -468,41 +445,42 @@
     }
 
     footer {
-      padding: var(--space-12) 0 var(--space-16);
+      padding: var(--space-10) 0 var(--space-12);
       color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      text-align: center;
     }
 
     /* Floating Action Button (FAB) */
     .fab-container {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
+      bottom: 1.5rem;
+      right: 1.5rem;
       z-index: 9999;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 0.75rem;
+      gap: 0.6rem;
     }
 
     .fab-trigger {
-      width: 60px;
-      height: 60px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
       background: var(--color-gold);
       color: #0f141d;
       border: none;
-      box-shadow: 0 8px 32px rgba(185, 140, 42, 0.4);
+      box-shadow: 0 6px 24px rgba(185, 140, 42, 0.45);
       cursor: pointer;
       display: grid;
       place-items: center;
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, background-color 0.3s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
       outline: none;
     }
 
-    .fab-trigger:hover {
-      transform: scale(1.08) rotate(-5deg);
-      box-shadow: 0 12px 40px rgba(185, 140, 42, 0.6);
-      background: color-mix(in srgb, var(--color-gold) 90%, #fff);
+    .fab-trigger:hover, .fab-trigger:focus-visible {
+      transform: scale(1.06);
+      box-shadow: 0 8px 30px rgba(185, 140, 42, 0.6);
     }
 
     .fab-trigger:active {
@@ -512,32 +490,19 @@
     .fab-trigger svg {
       width: 24px;
       height: 24px;
-      transition: transform 0.3s ease;
-    }
-
-    .fab-container.is-active .fab-icon-download {
-      display: none !important;
-    }
-    .fab-container.is-active .fab-icon-close {
-      display: block !important;
-      animation: rotateIn 0.3s ease forwards;
-    }
-
-    @keyframes rotateIn {
-      from { transform: rotate(-90deg) scale(0.8); opacity: 0; }
-      to { transform: rotate(0) scale(1); opacity: 1; }
     }
 
     .fab-menu {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 0.6rem;
+      gap: 0.5rem;
       pointer-events: none;
       opacity: 0;
-      transform: translateY(20px) scale(0.9);
-      transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      transform: translateY(15px) scale(0.95);
+      transition: opacity 0.25s ease, transform 0.25s ease;
       width: max-content;
+      max-width: calc(100vw - 3rem);
     }
 
     .fab-container.is-active .fab-menu {
@@ -546,79 +511,41 @@
       transform: translateY(0) scale(1);
     }
 
-    .fab-container.is-active .dl-pill:nth-child(6) { transition-delay: 0.02s; }
-    .fab-container.is-active .dl-pill:nth-child(5) { transition-delay: 0.05s; }
-    .fab-container.is-active .dl-pill:nth-child(4) { transition-delay: 0.08s; }
-    .fab-container.is-active .dl-pill:nth-child(3) { transition-delay: 0.11s; }
-    .fab-container.is-active .dl-pill:nth-child(2) { transition-delay: 0.14s; }
-    .fab-container.is-active .dl-pill:nth-child(1) { transition-delay: 0.17s; }
-
     .fab-menu .dl-pill {
-      background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+      background: var(--color-surface);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--color-border);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-      padding: 0.75rem 1.25rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      padding: 0.65rem 1.1rem;
       border-radius: 999px;
-      transform: translateX(15px);
-      opacity: 0;
-      transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .fab-container.is-active .dl-pill {
-      transform: translateX(0);
-      opacity: 1;
-    }
-
-    @media (max-width: 768px) {
-      .fab-container {
-        bottom: 1.5rem;
-        right: 1.5rem;
-      }
-      .fab-trigger {
-        width: 54px;
-        height: 54px;
-      }
-      .fab-trigger svg {
-        width: 22px;
-        height: 22px;
-      }
-      .fab-menu .dl-pill {
-        padding: 0.65rem 1.1rem;
-      }
     }
 
     .zoomable {
       cursor: zoom-in;
-      transition: transform .25s ease, filter .25s ease;
-    }
-
-    .zoomable:hover {
-      transform: translateY(-2px) scale(1.01);
-      filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .42));
     }
 
     .gallery-card {
       display: grid;
-      grid-template-columns: 180px 1fr;
+      grid-template-columns: 160px 1fr;
       gap: var(--space-5);
       align-items: center;
       padding: clamp(1rem, 2vw, 1.5rem);
     }
 
     .thumb-wrap {
-      border-radius: 1rem;
+      border-radius: .75rem;
       overflow: hidden;
       border: 1px solid var(--color-border);
       background: color-mix(in srgb, var(--color-surface-2) 60%, transparent);
+      max-width: 100%;
     }
 
     .thumb-wrap img {
       width: 100%;
-      height: 100%;
-      aspect-ratio: 3 / 5;
-      object-fit: cover;
+      height: auto;
+      max-height: 260px;
+      object-fit: contain;
     }
 
     .thumb-copy small {
@@ -627,13 +554,13 @@
       letter-spacing: .14em;
       text-transform: uppercase;
       color: var(--color-gold);
-      margin-bottom: .35rem;
+      margin-bottom: .25rem;
     }
 
     .thumb-copy h3 {
       font-family: var(--font-display);
       font-size: var(--text-lg);
-      margin: 0 0 .35rem;
+      margin: 0 0 .25rem;
     }
 
     .thumb-copy p {
@@ -648,9 +575,10 @@
       align-items: center;
       justify-content: center;
       padding: 0;
-      background: rgba(5, 8, 14, .92);
+      background: rgba(5, 8, 14, .94);
       backdrop-filter: blur(12px);
-      z-index: 9999;
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 99999;
     }
 
     .modal[aria-hidden="false"] {
@@ -661,60 +589,102 @@
       position: relative;
       width: 100vw;
       height: 100vh;
-      padding: 2rem;
-      border-radius: 0;
-      background: transparent;
-      border: 0;
-      box-shadow: none;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .modal-dialog img {
-      width: auto;
-      height: auto;
-      max-width: 96vw;
-      max-height: 92vh;
+    .modal-stage {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: pan-x pan-y pinch-zoom;
+    }
+
+    .modal-stage img {
+      max-width: 95vw;
+      max-height: 90vh;
       object-fit: contain;
-      border-radius: 1rem;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, .45);
+      border-radius: .5rem;
+      transition: transform 0.15s ease-out;
+      transform-origin: center center;
     }
 
     .modal-close {
       position: fixed;
       top: 1rem;
       right: 1rem;
-      min-width: 52px;
-      min-height: 52px;
+      width: 44px;
+      height: 44px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, .22);
-      background: rgba(15, 20, 29, .72);
+      border: 1px solid rgba(255, 255, 255, .3);
+      background: rgba(15, 20, 29, .8);
       color: #fff;
       cursor: pointer;
-      z-index: 10000;
+      z-index: 100000;
       font-size: 1.2rem;
+      display: grid;
+      place-items: center;
     }
 
-    @media (max-width: 720px) {
-      .gallery-card {
-        grid-template-columns: 1fr;
-      }
+    .modal-toolbar {
+      position: fixed;
+      left: 50%;
+      bottom: 1.5rem;
+      transform: translateX(-50%);
+      display: flex;
+      gap: .5rem;
+      padding: .4rem .6rem;
+      border-radius: 999px;
+      background: rgba(15, 20, 29, .85);
+      border: 1px solid rgba(255, 255, 255, .2);
+      z-index: 100000;
     }
 
-    @media (max-width: 920px) {
+    .modal-tool {
+      min-width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .15);
+      background: rgba(255, 255, 255, .1);
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      font-family: var(--font-body);
+    }
 
+    @media (max-width: 900px) {
       .hero,
       .section-grid {
         grid-template-columns: 1fr;
       }
 
+      .shell {
+        width: calc(100% - 1.5rem);
+      }
+
       .meta {
         grid-template-columns: 1fr;
       }
+    }
 
-      h1 {
-        max-width: none;
+    @media (max-width: 600px) {
+      .gallery-card {
+        grid-template-columns: 1fr;
+      }
+
+      .carousel-nav {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+      }
+
+      .fab-container {
+        bottom: 1rem;
+        right: 1rem;
       }
     }
 
@@ -772,12 +742,12 @@
       </article>
       <figure class="panel shield-wrap shield-carousel" aria-label="Galería principal del escudo">
         <button class="carousel-nav carousel-prev" type="button" aria-label="Imagen anterior">&#8249;</button>
-        <div class="carousel-viewport">
+        <div class="carousel-viewport" id="carousel-viewport">
           <div class="carousel-track" id="shield-carousel-track">
             <div class="carousel-slide">
               <div class="shield-frame">
                 <img class="shield-image zoomable" data-modal-image="true"
-                  src="img/escudo_bordado.png"
+                  src="https://raw.githubusercontent.com/policiatierradelfuego/escudo-bienestar/main/img/escudo_bordado.png"
                   alt="Escudo de la División Bienestar Policial - Versión Bordada" width="900"
                   height="1200" loading="eager" />
               </div>
@@ -785,7 +755,7 @@
             <div class="carousel-slide">
               <div class="shield-frame">
                 <img class="shield-image zoomable" data-modal-image="true"
-                  src="img/escudo_plano.png"
+                  src="https://raw.githubusercontent.com/policiatierradelfuego/escudo-bienestar/main/img/escudo_plano.png"
                   alt="Escudo de la División Bienestar Policial - Versión Plana" width="1080"
                   height="1600" loading="lazy" />
               </div>
@@ -793,7 +763,7 @@
             <div class="carousel-slide">
               <div class="shield-frame">
                 <img class="shield-image zoomable" data-modal-image="true"
-                  src="img/pin_metal.png"
+                  src="https://raw.githubusercontent.com/policiatierradelfuego/escudo-bienestar/main/img/pin_metal.png"
                   alt="Pin Metálico del escudo de la División Bienestar Policial" width="2050"
                   height="2048" loading="lazy" />
               </div>
@@ -801,7 +771,7 @@
             <div class="carousel-slide">
               <div class="shield-frame">
                 <img class="shield-image zoomable" data-modal-image="true"
-                  src="img/pin_plano.png"
+                  src="https://raw.githubusercontent.com/policiatierradelfuego/escudo-bienestar/main/img/pin_plano.png"
                   alt="Pin Plano del escudo de la División Bienestar Policial" width="1823"
                   height="1821" loading="lazy" />
               </div>
@@ -872,7 +842,7 @@
       <article class="panel gallery-card">
         <div class="thumb-wrap">
           <img class="thumb-image zoomable" data-modal-image="true"
-            src="img/infografia.png"
+            src="https://raw.githubusercontent.com/policiatierradelfuego/escudo-bienestar/main/img/infografia.png"
             alt="Infografía descriptiva del escudo" width="564" height="1000" loading="lazy" />
         </div>
         <div class="thumb-copy">
@@ -959,6 +929,7 @@
       const zoomResetBtn = document.getElementById('zoom-reset');
       const zoomableItems = document.querySelectorAll('[data-modal-image]');
       const carouselTrack = document.getElementById('shield-carousel-track');
+      const carouselViewport = document.getElementById('carousel-viewport');
       const prevBtn = document.querySelector('.carousel-prev');
       const nextBtn = document.querySelector('.carousel-next');
       const dots = document.querySelectorAll('.carousel-dot');
@@ -999,7 +970,7 @@
         modal.style.display = 'flex';
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
-        setZoom(1.8);
+        setZoom(1.2);
         if (modalStage) {
           modalStage.scrollTop = 0;
           modalStage.scrollLeft = 0;
@@ -1098,6 +1069,31 @@
           goToSlide(parseInt(dot.getAttribute('data-slide-to'), 10));
         });
       });
+
+      // Touch / Swipe support for Mobile Carousel
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      if (carouselViewport) {
+        carouselViewport.addEventListener('touchstart', function (e) {
+          touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        carouselViewport.addEventListener('touchend', function (e) {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+        }, { passive: true });
+      }
+
+      function handleSwipe() {
+        const threshold = 40;
+        if (touchEndX < touchStartX - threshold) {
+          goToSlide(currentSlide + 1);
+        } else if (touchEndX > touchStartX + threshold) {
+          goToSlide(currentSlide - 1);
+        }
+      }
+
       goToSlide(0);
 
       function downloadFromSrc(src, filename) {
@@ -1132,7 +1128,7 @@ La mitad inferior diestra del escudo, en gules, contiene el bastón de Esculapio
 
 La mitad inferior siniestra, en celeste, muestra la letra griega psi en plata, símbolo universal de la psicología. Este cuartel representa la contención emocional, la salud mental, el acompañamiento terapéutico y el equilibrio psíquico del personal policial, dimensiones esenciales dentro de una concepción moderna e integral del bienestar institucional.
 
-La plata, presente tanto en el albatros como en el bastón de Esculapio y en la psi, alude heráldicamente a pureza, rectitud, verdad, transparencia y espíritu de servicio. Su reiteración en los signos principales unifica visual y conceptualmente el mensaje del escudo: la protección de la persona policial desde una ética de cuidado, honestidad y dedicación.
+La plata, presente tanto en el albatros como en el bastón de Esculapio y en la psi, alude heráldically a pureza, rectitud, verdad, transparencia y espíritu de servicio. Su reiteración en los signos principales unifica visual y conceptualmente el mensaje del escudo: la protección de la persona policial desde una ética de cuidado, honestidad y dedicación.
 
 Las leyendas “BIENESTAR POLICIAL” y “SERVICIO Y CUIDADO” completan el sentido del conjunto al formular de manera expresa la finalidad de la División. Así, el escudo se presenta como una síntesis simbólica de asistencia médica, acompañamiento psicológico, vigilancia institucional y pertenencia fueguina, ordenadas bajo una misma vocación de resguardo humano y profesional.`;
 
@@ -1165,27 +1161,16 @@ Las leyendas “BIENESTAR POLICIAL” y “SERVICIO Y CUIDADO” completan el se
       // FAB Toggle Logic
       const fabContainer = document.getElementById('fab-download-container');
       const fabTrigger = document.getElementById('fab-download-trigger');
-      const fabIconDownload = fabTrigger.querySelector('.fab-icon-download');
-      const fabIconClose = fabTrigger.querySelector('.fab-icon-close');
 
       function toggleFab() {
         const isActive = fabContainer.classList.toggle('is-active');
         fabTrigger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-        if (isActive) {
-          fabIconClose.style.display = 'block';
-          fabIconDownload.style.display = 'none';
-        } else {
-          fabIconClose.style.display = 'none';
-          fabIconDownload.style.display = 'block';
-        }
       }
 
       function closeFab() {
-        if (fabContainer.classList.contains('is-active')) {
+        if (fabContainer && fabContainer.classList.contains('is-active')) {
           fabContainer.classList.remove('is-active');
           fabTrigger.setAttribute('aria-expanded', 'false');
-          fabIconClose.style.display = 'none';
-          fabIconDownload.style.display = 'block';
         }
       }
 
